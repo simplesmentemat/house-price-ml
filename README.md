@@ -89,18 +89,18 @@ A predição foi realizada utilizando vários modelos, como Random Forest, Gradi
 
 Com isso feito, as 10 propriedades com maior possibilidade de retorno são:
 
-| Property ID  | Listing Price | Potential Sale No Renovation | Needs Renovation | Potential Sale With Renovation | Potential Profit With Renovation |
-|--------------|---------------|------------------------------|------------------|-------------------------------|-----------------------------------|
-| 1225069056   | $400,000      | $1,221,617                   | True             | $1,342,912                    | $942,912                          |
-| 9272202240   | $272,000      | $820,545                     | True             | $1,016,556                    | $744,556                          |
-| 7899801088   | $209,900      | $662,872                     | True             | $865,680                      | $655,780                          |
-| 1222029056   | $270,000      | $671,541                     | True             | $880,946                      | $610,946                          |
-| 8835770368   | $119,900      | $692,615                     | True             | $710,702                      | $590,802                          |
-| 2625079040   | $299,000      | $1,059,917                   | True             | $872,879                      | $573,879                          |
-| 3869900032   | $215,000      | $856,226                     | True             | $762,304                      | $547,304                          |
-| 3425059072   | $245,000      | $755,923                     | True             | $773,988                      | $528,988                          |
-| 9406530560   | $110,700      | $594,809                     | True             | $623,231                      | $512,531                          |
-| 1223089024   | $378,000      | $1,068,325                   | True             | $868,146                      | $490,146                          |
+| property_id  | listing_price | potential_profit_no_renovation | potential_profit_with_renovation |
+|--------------|---------------|--------------------------------|----------------------------------|
+| 1225069056   | $400,000.00   | $821,617.00                    | $942,912.00                      |
+| 9272202240   | $272,000.00   | $548,545.00                    | $744,556.00                      |
+| 7899801088   | $209,900.00   | $452,972.00                    | $655,780.00                      |
+| 1222029056   | $270,000.00   | $401,541.00                    | $610,946.00                      |
+| 8835770368   | $119,900.00   | $572,715.00                    | $590,802.00                      |
+| 2625079040   | $299,000.00   | $760,917.00                    | $573,879.00                      |
+| 3869900032   | $215,000.00   | $641,226.00                    | $547,304.00                      |
+| 3425059072   | $245,000.00   | $510,923.00                    | $528,988.00                      |
+| 9406530560   | $110,700.00   | $484,109.00                    | $512,531.00                      |
+| 1223089024   | $378,000.00   | $690,325.00                    | $490,146.00                      |
 
 **Uma vez a casa em posse da empresa, qual o melhor momento para vendê-las e qual seria o preço da venda?**
 
@@ -108,4 +108,4 @@ Quando atingir o potencial de lucro.
 
 **A House Rocket deveria fazer uma reforma para aumentar o preço da venda? Quais seriam as sugestões de mudanças? Qual o incremento no preço dado por cada opção de reforma?**
 
-Se a casa estiver na condição 3 ou 1, é necessário renovar a casa para que o preço de venda seja maior.
+Para decidir se a House Rocket deve realizar reformas em uma propriedade, é importante considerar o estado atual da casa (condição 1 ou 3) e o potencial de lucro após a renovação. As reformas podem agregar um valor significativo ao preço de venda e melhorar o retorno sobre o investimento, mas é importante perceber que existem casas que precisam de reforma mas o potencial de lucro é menor que se considerar a condição atual.

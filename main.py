@@ -39,10 +39,14 @@ def main():
     recomend = pl.read_csv("predictions.csv")
 
     recomend = recomend.with_columns(
+        (pl.col('potential_sale_no_renovation') - pl.col('listing_price')).alias('potential_profit_no_renovation')
+    )
+
+    recomend = recomend.with_columns(
         (pl.col('potential_sale_with_renovation') - pl.col('listing_price')).alias('potential_profit_with_renovation')
     )
 
-    recomend = recomend.sort('potential_profit_with_renovation', descending=True)
+    recomend = recomend.select(["property_id", "listing_price", "potential_profit_no_renovation", "potential_profit_with_renovation"]).sort('potential_profit_with_renovation', descending=True)
 
     top_recommendation = recomend.head(10)
 
