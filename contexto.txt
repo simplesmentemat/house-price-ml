@@ -1,0 +1,80 @@
+A House Rocket é uma plataforma digital que tem como modelo de negócio, a compra e a venda de imóveis usando tecnologia.
+
+Você é um Data Scientist contrato pela empresa para ajudar a encontrar as melhores oportunidades de negócio no mercado de imóveis.
+O CEO da House Rocket gostaria de maximizar a receita da empresa encontrando boas oportunidades de negócio.
+
+Sua principal estratégia é comprar boas casas em ótimas localizações com preços baixos e depois revendê-las posteriormente à preços mais altos. 
+Quanto maior a diferença entre a compra e a venda, maior o lucro da empresa e portanto maior sua receita.
+
+Entretanto, as casas possuem muitos atributos que as tornam mais ou menos atrativas aos compradores e vendedores e a localização e o período do ano também podem influenciar os preços.
+
+Portanto, seu trabalho como Data Scientist é responder as seguinte perguntas:
+
+Perguntas feita por mim:
+> Qual a correlação entre preço e número de quartos, banheiros, waterfront, sqft_lot, yr_built e afins
+R: As variáveis que têm a correlação mais forte com o preço listado são living_area_sqft, grade, above_grade_sqft, living_area_sqft15, num_bathrooms, e condition. 
+Isso sugere que essas características são fortes indicadoras do preço de uma propriedade. Características como year_built, year_renovated, longitude, e lot_area_sqft 
+têm correlações muito baixas com o preço listado, indicando que elas têm um impacto menor no preço da propriedade.
+
+> Qual tempo medio feito uma reforma? Fazer a diferença entre ano construido e ano renovado
+R: A diferença entre o ano de construção (year_built) e o ano de renovação (year_renovated) é de 56.299781 anos.
+
+> relação entre condition e year_renovated é relevante, 
+H0 = o year_renovated não depende da condition.
+H1 = o year_renovated depende da condition, casas em condição piores devem sofrer renovação.
+R: O valor p é extremamente pequeno (5.64e-09), muito menor que o nível de significância comum de 0.05. 
+Isso significa que rejeitamos a hipótese nula 𝐻0, que afirma que o ano de renovação (year_renovated) depende da condição (condition) da casa.
+
+> Então quando devemos fazer uma reforça?
+R: Condição 3 (5.25%): Esta condição apresenta a maior taxa de renovação, indicando que casas em condição 3 são as mais prováveis de serem renovadas. Isso pode sugerir que, ao atingir essa condição, é mais comum que os proprietários optem por renovar a casa.
+Condição 1 (3.33%): Esta é a segunda maior taxa de renovação. Casas nesta condição também têm uma probabilidade considerável de serem renovadas.
+Condições 2, 4 e 5 (cerca de 2.2%-2.4%): Essas condições têm taxas de renovação relativamente menores, sugerindo que as reformas são menos frequentes comparadas às condições 3 e 1.
+┌───────────┬─────────────────┐
+│ condition ┆ renovation_rate │
+│ ---       ┆ ---             │
+│ i64       ┆ f64             │
+╞═══════════╪═════════════════╡
+│ 3         ┆ 0.052455        │
+│ 4         ┆ 0.023948        │
+│ 1         ┆ 0.033333        │
+│ 5         ┆ 0.021752        │
+│ 2         ┆ 0.023256        │
+└───────────┴─────────────────┘
+
+> Qual o potencial de valorização nas casas que foram renovadas e são da condição 3 ou 1?
+┌───────────┬─────────────────────┬─────────────────────────┬──────────────────┐
+│ condition ┆ renovated_avg_price ┆ non_renovated_avg_price ┆ price_difference │
+│ ---       ┆ ---                 ┆ ---                     ┆ ---              │
+│ i64       ┆ f64                 ┆ f64                     ┆ f64              │
+╞═══════════╪═════════════════════╪═════════════════════════╪══════════════════╡
+│ 1         ┆ 252000.0            ┆ 337274.137931           ┆ -85274.137931    │
+│ 3         ┆ 759082.119565       ┆ 529995.7912             ┆ 229086.328366    │
+└───────────┴─────────────────────┴─────────────────────────┴──────────────────┘
+
+┌───────────┬─────────────────────┬─────────────────────────┬──────────────────┬───────────────┬───────────────────┬───────────────────────┐
+│ condition ┆ renovated_avg_price ┆ non_renovated_avg_price ┆ price_difference ┆ num_renovated ┆ num_non_renovated ┆ renovation_proportion │
+│ ---       ┆ ---                 ┆ ---                     ┆ ---              ┆ ---           ┆ ---               ┆ ---                   │
+│ i64       ┆ f64                 ┆ f64                     ┆ f64              ┆ i64           ┆ i64               ┆ f64                   │
+╞═══════════╪═════════════════════╪═════════════════════════╪══════════════════╪═══════════════╪═══════════════════╪═══════════════════════╡
+│ 1         ┆ 252000.0            ┆ 337274.137931           ┆ -85274.137931    ┆ 1             ┆ 29                ┆ 0.033333              │
+│ 3         ┆ 759082.119565       ┆ 529995.7912             ┆ 229086.328366    ┆ 736           ┆ 13295             ┆ 0.052455              │
+└───────────┴─────────────────────┴─────────────────────────┴──────────────────┴───────────────┴───────────────────┴───────────────────────┘
+
+R: Casas com condição 3 tem um aumento de 229086.328366 enquanto casas com condição 1 normalmente não são renovadas fica um adendo que há pouca amostra.
+
+> Verificar se o preço da venda é menor ou maior quando a reforça é feita.
+R: Se a reforma é feita o preço da venda é maior, com aumento de 230 mil no preço da venda.
+┌─────────────────────┬─────────────────────────┐
+│ renovated_avg_price ┆ non_renovated_avg_price │
+│ ---                 ┆ ---                     │
+│ f64                 ┆ f64                     │
+╞═════════════════════╪═════════════════════════╡
+│ 760379.02954        ┆ 530360.818155           │
+└─────────────────────┴─────────────────────────┘
+
+Quais casas o CEO da House Rocket deveria comprar e por qual preço de compra? 
+
+
+Uma vez a casa em posse da empresa, qual o melhor momento para vendê-las e qual seria o preço da venda?
+
+A House Rocket deveria fazer uma reforma para aumentar o preço da venda? Quais seriam as sugestões de mudanças? Qual o incremento no preço dado por cada opção de reforma?
